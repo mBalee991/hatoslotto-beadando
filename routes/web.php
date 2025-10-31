@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiagramController;
+use App\Http\Controllers\ContactController;
+
+// Kontakt oldal regisztráltnak
+Route::middleware(['auth'])->group(function () {
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+});
 
 // Nyitó oldal (mindenki számára)
 Route::get('/', function () {

@@ -28,14 +28,18 @@
             <nav id="nav">
                 <ul>
                     <li><a href="{{ url('/') }}">Kezdőlap</a></li>
-                    <li><a href="{{ route('diagram') }}">Diagram</a></li>
 
                     @auth
+						<li><a href="{{ route('diagram') }}">Diagram</a></li>
+						<li><a href="{{ route('contact') }}">Kapcsolat</a></li>
                         <li>
-                            <form method="POST" action="{{ route('logout') }}" style="display:inline;">
-                                @csrf
-                                <button type="submit" class="button small">Kijelentkezés</button>
-                            </form>
+							<form method="POST" action="{{ route('logout') }}" id="logout-form" style="margin: 0;">
+								@csrf
+								<a href="#"
+									onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+									Kijelentkezés
+								</a>
+							</form>
                         </li>
                     @else
                         <li><a href="{{ route('login') }}">Bejelentkezés</a></li>

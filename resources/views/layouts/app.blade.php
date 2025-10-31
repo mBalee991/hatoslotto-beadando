@@ -1,36 +1,45 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>@yield('title', 'Hatoslottó beadandó')</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ asset('theme/assets/css/main.css') }}" />
+    <noscript><link rel="stylesheet" href="{{ asset('theme/assets/css/noscript.css') }}" /></noscript>
+  </head>
+  <body class="is-preload">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- Wrapper -->
+    <div id="wrapper">
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+      <!-- Header -->
+      <header id="header">
+        <h1><a href="{{ url('/') }}">Hatoslottó</a></h1>
+        <nav>
+          <ul>
+            <li><a href="{{ route('diagram') }}">Diagram</a></li>
+          </ul>
+        </nav>
+      </header>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+      <!-- Main -->
+      <div id="main">
+        @yield('content')
+      </div>
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
+      <!-- Footer -->
+      <footer id="footer">
+        <p class="copyright">&copy; 2025 Hatoslottó beadandó | Design: <a href="https://html5up.net">HTML5 UP</a></p>
+      </footer>
+    </div>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
-    </body>
+    <!-- Scripts -->
+    <script src="{{ asset('theme/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('theme/assets/js/jquery.scrollex.min.js') }}"></script>
+    <script src="{{ asset('theme/assets/js/jquery.scrolly.min.js') }}"></script>
+    <script src="{{ asset('theme/assets/js/browser.min.js') }}"></script>
+    <script src="{{ asset('theme/assets/js/breakpoints.min.js') }}"></script>
+    <script src="{{ asset('theme/assets/js/util.js') }}"></script>
+    <script src="{{ asset('theme/assets/js/main.js') }}"></script>
+  </body>
 </html>

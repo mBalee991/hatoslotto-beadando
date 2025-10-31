@@ -6,9 +6,16 @@
 <section id="diagram" class="main special">
   <header class="major">
     <h2>Évenkénti nyereményösszegek</h2>
+    <p>Az adatok a Hatoslottó húzások és nyeremények alapján, 1988–2013 között.</p>
   </header>
-  <canvas id="chartCanvas" height="100"></canvas>
-  <p class="text-center text-muted mt-3">Forrás: Hatoslottó adatok (Laravel beadandó)</p>
+
+  <div style="width: 100%; max-width: 900px; margin: 0 auto;">
+    <canvas id="chartCanvas" height="100"></canvas>
+  </div>
+
+  <p class="text-center text-muted mt-3">
+    Forrás: Hatoslottó adatok (Laravel beadandó)
+  </p>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -24,14 +31,29 @@ new Chart(document.getElementById('chartCanvas'), {
     datasets: [{
       label: 'Összes nyeremény (Ft)',
       data: osszeg,
-      backgroundColor: 'rgba(54,162,235,0.5)',
-      borderColor: 'rgba(54,162,235,1)',
+      backgroundColor: 'rgba(54, 162, 235, 0.6)',
+      borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 1
     }]
   },
   options: {
-    scales: { y: { beginAtZero: true } },
-    plugins: { legend: { display: true } }
+    responsive: true,
+    plugins: {
+      legend: { display: true },
+      tooltip: {
+        callbacks: {
+          label: ctx => ctx.parsed.y.toLocaleString('hu-HU') + ' Ft'
+        }
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: v => v.toLocaleString('hu-HU') + ' Ft'
+        }
+      }
+    }
   }
 });
 </script>

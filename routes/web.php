@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessageController;
 
 // Kontakt oldal regisztráltnak
 Route::middleware(['auth'])->group(function () {
@@ -27,6 +28,9 @@ Route::middleware(['auth'])->group(function () {
         // opcionálisan átirányíthatjuk a diagramra
         return redirect()->route('diagram');
     })->name('dashboard');
+
+    // Message Controller
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages');
 });
 
 // A Breeze csomag által biztosított auth route-ok (login, register, stb.)

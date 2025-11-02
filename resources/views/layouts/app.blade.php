@@ -32,6 +32,7 @@
                     @auth
 						<li><a href="{{ route('diagram') }}">Diagram</a></li>
 						<li><a href="{{ route('contact') }}">Kapcsolat</a></li>
+                        <li> <a href="{{ route('messages') }}">Üzenetek</a></li>
                         <li>
 							<form method="POST" action="{{ route('logout') }}" id="logout-form" style="margin: 0;">
 								@csrf

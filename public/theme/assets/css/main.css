@@ -3783,3 +3783,20 @@ input, select, textarea {
 			}
 
 		}
+.table-wrapper table th, 
+.table-wrapper table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-wrapper table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.button.danger {
+  background: #ff4d4d;
+  color: white;
+}
+.button.danger:hover {
+  background: #cc0000;
+}

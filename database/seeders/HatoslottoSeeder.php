@@ -18,7 +18,7 @@ class HatoslottoSeeder extends Seeder
     private function loadFileToTable($filename, $table, $columns)
     {
         if (!file_exists($filename)) {
-            $this->command->error("❌ A fájl nem található: $filename");
+            $this->command->error("A fájl nem található: $filename");
             return;
         }
 
@@ -31,10 +31,10 @@ class HatoslottoSeeder extends Seeder
                 $record = array_combine($columns, $data);
                 DB::table($table)->insert($record);
             } else {
-                $this->command->warn("⚠️ Hibás sor kihagyva a(z) $table táblában: $line");
+                $this->command->warn("Hibás sor kihagyva a(z) $table táblában: $line");
             }
         }
 
-        $this->command->info("✅ Sikeresen feltöltve: $table (" . count($lines) . " sor)");
+        $this->command->info("Sikeresen feltöltve: $table (" . count($lines) . " sor)");
     }
 }

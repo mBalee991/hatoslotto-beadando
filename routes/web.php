@@ -4,14 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HuzasController;
 
-// Kontakt oldal regisztráltnak
-Route::middleware(['auth'])->group(function () {
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-});
-
-// Nyitó oldal (mindenki számára)
+// Nyitó oldal
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -19,19 +15,25 @@ Route::get('/', function () {
 // Csak bejelentkezett felhasználóknak
 Route::middleware(['auth'])->group(function () {
 
-    // Diagram oldal
-    Route::get('/diagram', [DiagramController::class, 'index'])
-        ->name('diagram');
+    // Diagram
+    Route::get('/diagram', [DiagramController::class, 'index'])->name('diagram');
 
-    // Dashboard (ha valami erre hivatkozik)
-    Route::get('/dashboard', function () {
-        // opcionálisan átirányíthatjuk a diagramra
-        return redirect()->route('diagram');
-    })->name('dashboard');
-
-    // Message Controller
+    // Üzenetek
     Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+
+    // Kapcsolat oldal
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+    // Admin rész – külön csoportban
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+        // Húzások CRUD (CSAK ADMINNAK)
+        Route::resource('huzasok', HuzasController::class)
+            ->parameters(['huzasok' => 'huzas']);
+    });
 });
 
-// A Breeze csomag által biztosított auth route-ok (login, register, stb.)
-require __DIR__.'/auth.php';
+// Breeze auth route-ok (login, register stb.)
+require __DIR__ . '/auth.php';

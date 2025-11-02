@@ -30,6 +30,12 @@
                     <li><a href="{{ url('/') }}">Kezdőlap</a></li>
 
                     @auth
+                        @if(Auth::user()->role === 'admin')
+                            <li><a href="{{ route('admin') }}">Admin</a></li>
+                            <li><a href="{{ route('huzasok.index') }}">Húzások</a></li>
+                        @endif
+                    @endauth
+                    @auth
 						<li><a href="{{ route('diagram') }}">Diagram</a></li>
 						<li><a href="{{ route('contact') }}">Kapcsolat</a></li>
                         <li> <a href="{{ route('messages') }}">Üzenetek</a></li>

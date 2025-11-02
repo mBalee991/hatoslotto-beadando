@@ -3,13 +3,23 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
-            HatoslottoSeeder::class,
-        ]);
+        $this->call(HatoslottoSeeder::class);
+    
+        // Alap admin felhasználó
+        User::updateOrCreate(
+            ['email' => 'admin@teszt.hu'],
+            [
+                'name' => 'Admin Felhasználó',
+                'password' => Hash::make('admin123'),
+                'role' => 'admin',
+            ]
+        );
     }
 }

@@ -42,9 +42,12 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+		
+		// Nem léptetjük be azonnal
+        // Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        // Irány a login oldal + üzenet
+		return redirect()->route('login')
+        ->with('success', 'Sikeres regisztráció! Jelentkezz be a folytatáshoz.');
     }
 }

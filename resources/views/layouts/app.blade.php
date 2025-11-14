@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ asset('theme/assets/css/main.css') }}" />
         <noscript><link rel="stylesheet" href="{{ asset('theme/assets/css/noscript.css') }}" /></noscript>
 
-        <!-- Laravel Vite (ha kell Breeze vagy saját CSS) -->
+        <!-- Laravel Vite (Breeze-hez, ha használod) -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
@@ -21,32 +21,32 @@
             <header id="header" class="alt">
                 <span class="logo"><img src="{{ asset('theme/images/logo.svg') }}" alt="" /></span>
                 <h1>Hatoslottó Beadandó</h1>
-                <p>Laravel 12 + Stellar HTML5UP sablon</p>
+                <p>Laravel 12 + Stellar sablon</p>
             </header>
 
-            <!-- Nav -->
+            <!-- Navigation -->
             <nav id="nav">
-                <ul>
-                    <li><a href="{{ url('/') }}">Kezdőlap</a></li>
+                <ul class="links">
+                    <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Kezdőlap</a></li>
 
                     @auth
                         @if(Auth::user()->role === 'admin')
-                            <li><a href="{{ route('admin') }}">Admin</a></li>
-                            <li><a href="{{ route('huzasok.index') }}">Húzások</a></li>
+                            <li><a href="{{ route('admin') }}" class="{{ request()->is('admin') ? 'active' : '' }}">Admin</a></li>
+                            <li><a href="{{ route('huzasok.index') }}" class="{{ request()->is('huzasok*') ? 'active' : '' }}">Húzások</a></li>
                         @endif
-                    @endauth
-                    @auth
-						<li><a href="{{ route('diagram') }}">Diagram</a></li>
-						<li><a href="{{ route('contact') }}">Kapcsolat</a></li>
-                        <li> <a href="{{ route('messages') }}">Üzenetek</a></li>
+
+                        <li><a href="{{ route('diagram') }}" class="{{ request()->is('diagram') ? 'active' : '' }}">Diagram</a></li>
+                        <li><a href="{{ route('contact') }}" class="{{ request()->is('contact') ? 'active' : '' }}">Kapcsolat</a></li>
+                        <li><a href="{{ route('messages') }}" class="{{ request()->is('messages') ? 'active' : '' }}">Üzenetek</a></li>
+
                         <li>
-							<form method="POST" action="{{ route('logout') }}" id="logout-form" style="margin: 0;">
-								@csrf
-								<a href="#"
-									onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-									Kijelentkezés
-								</a>
-							</form>
+                            <form method="POST" action="{{ route('logout') }}" id="logout-form" style="margin: 0;">
+                                @csrf
+                                <a href="#" class="button primary small"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Kijelentkezés
+                                </a>
+                            </form>
                         </li>
                     @else
                         <li><a href="{{ route('login') }}">Bejelentkezés</a></li>

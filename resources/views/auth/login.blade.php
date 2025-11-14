@@ -1,4 +1,17 @@
 <x-guest-layout>
+	@if (session('success'))
+    <div style="
+        background-color: #d1e7dd;
+        color: #0f5132;
+        border: 1px solid #badbcc;
+        border-radius: 8px;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        text-align: center;
+    ">
+        {{ session('success') }}
+    </div>
+@endif
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

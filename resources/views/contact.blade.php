@@ -24,7 +24,7 @@
                     @error('message') <p class="text-danger">{{ $message }}</p> @enderror
                 </div>
                 <div class="col-12" style="text-align: center;">
-					<li><button type="submit" class="button primary">Küldés</button></li></br>
+                    <button type="submit" class="button primary" style="margin-top: 1rem;">Küldés</button>
                 </div>
             </div>
         </form>

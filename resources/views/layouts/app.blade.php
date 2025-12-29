@@ -10,7 +10,7 @@
         <noscript><link rel="stylesheet" href="{{ asset('theme/assets/css/noscript.css') }}" /></noscript>
 
         <!-- Laravel Vite (Breeze-hez, ha használod) -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @include('partials.vite-assets')
     </head>
 
     <body class="is-preload">

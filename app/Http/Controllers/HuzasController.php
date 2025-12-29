@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Huzas;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class HuzasController extends Controller
 {
@@ -22,7 +23,15 @@ class HuzasController extends Controller
     {
         $request->validate([
             'ev' => 'required|integer|min:1988|max:2100',
-            'het' => 'required|integer|min:1|max:52',
+            'het' => [
+                'required',
+                'integer',
+                'min:1',
+                'max:52',
+                Rule::unique('huzas')->where(fn ($query) => $query->where('ev', $request->ev)),
+            ],
+        ], [
+            'het.unique' => 'Ebben az évben ez a hét már rögzítésre került.',
         ]);
 
         Huzas::create([
@@ -42,7 +51,17 @@ class HuzasController extends Controller
     {
         $request->validate([
             'ev' => 'required|integer|min:1988|max:2100',
-            'het' => 'required|integer|min:1|max:52',
+            'het' => [
+                'required',
+                'integer',
+                'min:1',
+                'max:52',
+                Rule::unique('huzas')
+                    ->ignore($huzas->id)
+                    ->where(fn ($query) => $query->where('ev', $request->ev)),
+            ],
+        ], [
+            'het.unique' => 'Ebben az évben ez a hét már rögzítésre került.',
         ]);
 
         $huzas->update([
